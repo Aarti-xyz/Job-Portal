@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Edit Company</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+}
+.container{
+width:500px;
+margin:30px auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0px 0px 10px gray;
+}
+
+h2{
+text-align:center;
+color:#0d6efd;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:12px;
+background:green;
+color:white;
+border:none;
+cursor:pointer;
+border-radius:5px;
+}
+
+a{
+text-decoration:none;
+display:block;
+text-align:center;
+margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Edit Company</h2>
+
+<form th:action="@{/admin/update-company}" method="post">
+
+<input type="hidden"name="id"th:value="${company.id}">
+
+<input type="text"name="companyName"th:value="${company.companyName}"required>
+
+<input type="email"name="email"th:value="${company.email}"required>
+
+<input type="text"name="phone"th:value="${company.phone}"required>
+
+<input type="text"name="website"th:value="${company.website}">
+
+<input type="text"name="address"th:value="${company.address}">
+
+<textarea name="description"th:text="${company.description}">
+</textarea>
+
+<button type="submit">
+
+Update Company
+
+</button>
+
+</form>
+
+<a href="/admin/companies">
+
+Back
+
+</a>
+
+</div>
+
+</body>
+
+</html>

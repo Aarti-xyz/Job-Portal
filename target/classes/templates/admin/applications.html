@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Manage Applications</title>
+<style>
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+}
+
+h1{
+background:#0d6efd;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+table{
+width:95%;
+margin:30px auto;
+border-collapse:collapse;
+background:white;
+box-shadow:0px 0px 10px gray;
+}
+
+th{
+background:#0d6efd;
+color:white;
+padding:12px;
+}
+
+td{
+border:1px solid #ddd;
+padding:12px;
+text-align:center;
+}
+
+.back{
+display:block;
+width:180px;
+margin:30px auto;
+text-align:center;
+text-decoration:none;
+background:#0d6efd;
+color:white;
+padding:10px;
+border-radius:5px;
+}
+
+.pending{
+color:orange;
+font-weight:bold;
+}
+
+.accepted{
+color:green;
+font-weight:bold;
+}
+
+.rejected{
+color:red;
+font-weight:bold;
+}
+</style>
+</head>
+<body>
+<h1>Manage Applications</h1>
+<table>
+<tr>
+<th>ID</th>
+<th>User Email</th>
+<th>Job Title</th>
+<th>Company</th>
+<th>Status</th>
+</tr>
+<tr th:each="app: ${applications}">
+<td th:text="${app.id}"></td>
+<td th:text="${app.userEmail}"></td>
+<td th:text="${app.jobTitle}"></td>
+<td th:text="${app.company}"></td>
+<td>
+
+<span th:if="${app.status=='Pending'}"class="pending"
+th:text="${app.status}">
+</span>
+<span th:if="${app.status=='Accepted'}"class="accepted"
+th:text="${app.status}">
+</span>
+
+<span th:if="${app.status=='Rejected'}"class="rejected"
+th:text="${app.status}">
+</span>
+</td>
+</tr>
+</table>
+<a href="/admin/dashboard" class="back">
+Back to Dashboard
+</a>
+</body>
+</html>

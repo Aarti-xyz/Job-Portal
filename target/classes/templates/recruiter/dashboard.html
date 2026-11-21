@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Recruiter Dashboard</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+}
+
+h1{
+background:#0d6efd;
+color:white;
+text-align:center;
+padding:20px;
+margin-bottom:30px;
+}
+
+/* Summary Cards */
+
+.summary{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:25px;
+margin-bottom:30px;
+}
+
+.box{
+width:220px;
+background:white;
+padding:25px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 0 10px lightgray;
+}
+
+.box h2{
+font-size:45px;
+color:#0d6efd;
+margin-bottom:10px;
+}
+
+.box p{
+font-size:20px;
+font-weight:bold;
+}
+
+/* Buttons */
+
+.top{
+text-align:center;
+margin-bottom:30px;
+}
+
+.top a{
+text-decoration:none;
+color:white;
+padding:12px 25px;
+margin:10px;
+border-radius:6px;
+display:inline-block;
+font-size:18px;
+}
+
+.add{
+background:#0d6efd;
+}
+
+.view{
+background:green;
+}
+
+.top a:hover{
+opacity:0.9;
+}
+
+/* Job Cards */
+
+.jobs{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:25px;
+padding:20px;
+}
+
+.card{
+width:340px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px lightgray;
+}
+
+.card h2{
+color:#0d6efd;
+margin-bottom:15px;
+}
+
+.card p{
+margin:10px 0;
+font-size:16px;
+}
+
+.btn{
+display:inline-block;
+padding:10px 18px;
+text-decoration:none;
+color:white;
+border-radius:5px;
+margin-top:15px;
+margin-right:10px;
+}
+
+.edit{
+background:orange;
+}
+
+.delete{
+background:red;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Recruiter Dashboard</h1>
+
+
+
+
+<div class="summary">
+
+<div class="box">
+<h2 th:text="${totalJobs}">0</h2>
+<p>Total Jobs</p>
+</div>
+
+<div class="box">
+<h2 th:text="${totalApplications}">0</h2>
+<p>Total Applications</p>
+</div>
+
+<div class="box">
+<h2 th:text="${pending}">0</h2>
+<p>Pending</p>
+</div>
+
+<div class="box">
+<h2 th:text="${accepted}">0</h2>
+<p>Accepted</p>
+</div>
+
+<div class="box">
+<h2 th:text="${rejected}">0</h2>
+<p>Rejected</p>
+</div>
+
+</div>
+
+
+
+<div class="top">
+
+<a href="/add-job" class="add">
+Add New Job
+</a>
+
+<a href="/recruiter/applications" class="view">
+View Applications
+</a>
+
+</div>
+
+
+<div class="jobs">
+
+<div class="card" th:each="job : ${jobs}">
+
+<h2 th:text="${job.title}">Job Title</h2>
+
+<p>
+<b>Company :</b>
+<span th:text="${job.company}"></span>
+</p>
+
+<p>
+<b>Location :</b>
+<span th:text="${job.location}"></span>
+</p>
+
+<p>
+<b>Salary :</b>
+<span th:text="${job.salary}"></span>
+</p>
+
+<p>
+<b>Description :</b>
+<span th:text="${job.description}"></span>
+</p>
+
+<a th:href="@{/edit-job/{id}(id=${job.id})}" class="btn edit">
+Edit
+</a>
+
+<a th:href="@{/delete-job/{id}(id=${job.id})}"
+class="btn delete"
+onclick="return confirm('Are you sure you want to delete this job?')">
+Delete
+</a>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

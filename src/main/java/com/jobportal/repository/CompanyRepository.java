@@ -1,0 +1,8 @@
+package com.jobportal.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.jobportal.entity.Company;
+
+public interface CompanyRepository extends JpaRepository<Company, Integer> {
+
+}

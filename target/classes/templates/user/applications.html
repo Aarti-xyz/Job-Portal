@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>My Applications</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+}
+
+.container{
+width:90%;
+margin:40px auto;
+}
+
+h2{
+text-align:center;
+color:#0d6efd;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+box-shadow:0 0 10px lightgray;
+}
+
+th,td{
+padding:12px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+th{
+background:#0d6efd;
+color:white;
+}
+
+a{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+background:#0d6efd;
+color:white;
+padding:10px 20px;
+border-radius:5px;
+}
+
+a:hover{
+background:#084298;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>My Applications</h2>
+
+<table>
+
+<tr>
+<th>Job Title</th>
+<th>Company</th>
+<th>Status</th>
+</tr>
+
+<tr th:each="app : ${applications}">
+
+<td th:text="${app.jobTitle}"></td>
+
+<td th:text="${app.company}"></td>
+
+<td th:text="${app.status}"></td>
+
+</tr>
+
+</table>
+
+<br>
+
+<a href="/user/dashboard">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

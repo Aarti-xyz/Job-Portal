@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> User Login</title>
+<style>
+body{
+font-family:Arial;
+background-color:white;
+}
+.container{
+width:350px;
+margin:100px auto;
+padding:20px;
+background:white;
+}
+
+h2{
+text-align:center;
+color:blue;
+}
+
+input{
+width:100%;
+padding:10px;
+background:blue;
+color:white;
+font-size:16px;
+}
+
+button:hover{
+    background:darkblue;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h2>User Login</h2>
+
+<form action="/login" method="post">
+
+<label>Email</label>
+<input type="email" name="email" placeholder="Enter Email" required>
+
+<label>Password</label>
+<input type="password" name="password" placeholder="Enter Password" required>
+
+<button type="submit">Login</button>
+</form>
+<br>
+
+<p align="center">
+Don't have an account?
+<a href="/register">Register Here</a>
+</p>
+
+</div>
+
+</body>
+<body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Recruiter - Applications</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+}
+
+h1{
+background:#0d6efd;
+color:white;
+text-align:center;
+padding:20px;
+margin:0;    
+}
+
+table{
+width:90%;
+margin:30px auto;
+border-collapse:collapse;
+background:white;
+box-shadow:0px 0px 10px gray;
+}
+
+th{
+background:#0d6efd;
+color:white;
+padding:15px;
+}
+
+td{
+border:1px solid #ddd;
+padding:15px;
+text-align:center;
+}
+
+.approve{
+background:green;
+color:white;
+padding:8px 18px;
+text-decoration:none;
+border-radius:5px;
+}
+
+.reject{
+background:red;
+color:white;
+padding:8px 18px;
+text-decoration:none;
+border-radius:5px;
+}
+
+.back{
+display:block;
+width:180px;
+margin:20px auto;
+text-align:center;
+background:#0d6efd;
+color:white;
+padding:12px;
+border-radius:5px;
+text-decoration:none;
+}
+
+.pending{
+color:orange;
+font-weight:bold;
+}
+
+.accepted{
+color:green;
+font-weight:bold;
+}
+
+.rejected{
+color:red;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Recruiter Applications</h1>
+
+<table>
+
+<tr>
+<th>Email</th>
+<th>Job Title</th>
+<th>Company</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr th:each="app : ${applications}">
+
+<td th:text="${app.userEmail}"></td>
+
+<td th:text="${app.jobTitle}"></td>
+
+<td th:text="${app.company}"></td>
+
+<td>
+<span th:if="${app.status=='Pending'}"class="pending"
+th:text="${app.status}">
+</span>
+
+<span th:if="${app.status=='Accepted'}"class="accepted"
+th:text="${app.status}">
+</span>
+
+<span th:if="${app.status=='Rejected'}"class="rejected"
+th:text="${app.status}">
+</span>
+</td>
+
+<td>
+<a th:href="@{/accept(id=${app.id})}" class="approve">
+            Approve
+</a>
+
+<br><br>
+
+<a th:href="@{/reject(id=${app.id})}" class="reject">
+            Reject
+</a>
+</td>
+
+</tr>
+
+</table>
+
+<a href="/recruiter/dashboard" class="back">
+Back to Dashboard
+</a>
+
+</body>
+</html>

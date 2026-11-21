@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Available Jobs</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+        }
+
+h1{
+text-align:center;
+background:#0d6efd;
+color:white;
+padding:20px;
+        }
+
+.card{
+width:70%;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+  }
+
+.apply{
+background:green;
+color:white;
+padding:10px 20px;
+text-decoration:none;
+border-radius:5px;
+        }
+</style>
+
+</head>
+
+<body>
+
+<h1>Available Jobs</h1>
+<div class="search">
+
+<form action="/search" method="get">
+
+<input type="text"name="keyword"placeholder="Search by Job Title, Company or Location  style=width:350px;padding:10px;">
+
+<button type="submit">Search</button>
+
+</form>
+
+</div>
+
+<div class="card" th:each="job : ${jobs}">
+
+<h2 th:text="${job.title}"></h2>
+
+<p><b>Company:</b> <span th:text="${job.company}"></span></p>
+
+<p><b>Location:</b> <span th:text="${job.location}"></span></p>
+
+<p><b>Salary:</b> <span th:text="${job.salary}"></span></p>
+
+<p><b>Description:</b> <span th:text="${job.description}"></span></p>
+
+<a th:href="@{/apply-job(id=${job.id})}" class="apply">Apply</a>
+
+</div>
+
+</body>
+</html>
+

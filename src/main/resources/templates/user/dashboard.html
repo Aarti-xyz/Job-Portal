@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>User Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+margin:0;
+transition:0.4s;
+}
+
+.header{
+background:#0d6efd;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+width:90%;
+margin:30px auto;
+}
+
+.cards{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.card{
+width:220px;
+background:white;
+padding:20px;
+text-align:center;
+border-radius:10px;
+box-shadow:0 0 10px lightgray;
+transition:0.4s;
+}
+
+.card h2{
+color:#0d6efd;
+font-size:35px;
+margin:0;
+}
+
+.card p{
+margin-top:10px;
+font-weight:bold;
+}
+
+.buttons{
+text-align:center;
+}
+
+.buttons a{
+display:inline-block;
+text-decoration:none;
+background:#0d6efd;
+color:white;
+padding:12px 20px;
+margin:10px;
+border-radius:5px;
+}
+
+.buttons a:hover{
+background:#084298;
+}
+
+.react-box{
+text-align:center;
+color:#0d6efd;
+font-size:22px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.dark{
+background:#1f1f1f;
+color:white;
+}
+
+.dark .card{
+background:#333;
+color:white;
+}
+
+.dark .card h2{
+color:#00d9ff;
+}
+
+.dark .header{
+background:#111;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<div id="clock"></div>
+
+<div id="date"></div>
+
+<div id="theme"></div>
+
+<!-- Header -->
+
+<div class="header">
+<h1>
+Welcome,
+<span th:text="${user.name}">User</span>
+</h1>
+</div>
+
+
+<div class="container">
+
+<div class="cards">
+
+<div class="card">
+<h2 th:text="${jobCount}">0</h2>
+<p>Jobs Available</p>
+</div>
+
+<div class="card">
+<h2 th:text="${applicationCount}">0</h2>
+<p>Applications</p>
+</div>
+
+<div class="card">
+<h2 th:text="${resumeStatus}">Uploaded</h2>
+<p>Resume</p>
+</div>
+
+<div class="card">
+<h2 th:text="${profileStatus}">Completed</h2>
+<p>Profile</p>
+</div>
+
+</div>
+
+<div class="buttons">
+
+<a href="/jobs">Browse Jobs</a>
+
+<a href="/profile">My Profile</a>
+
+<a href="/resume">Upload Resume</a>
+
+<a href="/applications">My Applications</a>
+
+<a href="/logout">Logout</a>
+
+</div>
+
+</div>
+
+
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+
+
+function Clock(){
+
+    const [time,setTime]=React.useState(new Date());
+
+    React.useEffect(()=>{
+
+        const timer=setInterval(()=>{
+
+            setTime(new Date());
+
+        },1000);
+
+        return ()=>clearInterval(timer);
+
+    },[]);
+
+    return(
+
+<div style={{
+background:"#0d6efd",
+color:"white",
+width:"350px",
+margin:"20px auto",
+padding:"20px",
+borderRadius:"10px",
+textAlign:"center",
+fontSize:"30px",
+fontWeight:"bold"
+        }}>        
+
+            {time.toLocaleTimeString()}
+
+        </div>
+
+    );
+
+}
+
+try{
+    ReactDOM.createRoot(document.getElementById("clock")).render(<Clock/>);
+    console.log("Clock OK");
+}catch(e){
+    console.log(e);
+}
+
+
+
+function TodayDate(){
+
+    const today=new Date();
+
+    return(
+
+        <div className="react-box">
+
+            {today.toDateString()}
+
+        </div>
+
+    );
+
+}
+
+try{
+    ReactDOM.createRoot(document.getElementById("date")).render(<TodayDate/>);
+    console.log("Date OK");
+}catch(e){
+    console.log(e);
+}
+
+
+
+function ThemeToggle(){
+
+    const [dark,setDark]=React.useState(false);
+
+    React.useEffect(()=>{
+
+        if(dark){
+
+            document.body.classList.add("dark");
+
+        }
+
+        else{
+
+            document.body.classList.remove("dark");
+
+        }
+
+    },[dark]);
+
+    return(
+
+        <div style={{textAlign:"center",marginBottom:"20px"}}>
+
+            <button
+
+            onClick={()=>setDark(!dark)}
+
+            style={{
+
+                padding:"12px 20px",
+
+                background:"#0d6efd",
+
+                color:"white",
+
+                border:"none",
+
+                borderRadius:"5px",
+
+                fontSize:"16px",
+
+                cursor:"pointer"
+
+            }}>
+
+            {dark ? "Light Theme" : "Dark Theme"}
+
+            </button>
+
+        </div>
+
+    );
+
+}
+
+try{
+    ReactDOM.createRoot(document.getElementById("theme")).render(<ThemeToggle/>);
+    console.log("Theme OK");
+}catch(e){
+    console.log(e);
+}
+</script>
+
+</body>
+</html>
